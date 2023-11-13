@@ -1,0 +1,43 @@
+_format_version: "1.1"
+services:
+  - name: weatherbackend
+    url: http://weatherbackend:8080
+    plugins: []
+    routes:
+      - tags:
+          - OAS3_import
+          - OAS3file_openapi.json
+        name: weatherbackend-path-get
+        methods:
+          - GET
+        paths:
+          - /weather/general/outlook
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_openapi.json
+        name: weatherbackend-path_1-post
+        methods:
+          - POST
+        paths:
+          - /weather/general/outlook
+        strip_path: false
+      - tags:
+          - OAS3_import
+          - OAS3file_openapi.json
+        name: weatherbackend-path_2-get
+        methods:
+          - GET
+        paths:
+          - /weather/(?<name>\S+)$
+        strip_path: false
+    tags:
+      - OAS3_import
+      - OAS3file_openapi.json
+upstreams:
+  - name: weatherbackend
+    targets:
+      - target: weatherbackend:8080
+    tags:
+      - OAS3_import
+      - OAS3file_openapi.json
